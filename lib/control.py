@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
+import sys, pickle
 
 inputfile = sys.argv[1]
 
-controlchars = pickle.load('control.p')
+controlchars = pickle.load(open('control.p', 'rb'))
+
+print([x[0] for x in controlchars])
 
 def charcheck(mystring, chars):
     for c in chars:
@@ -20,5 +22,5 @@ with open(inputfile, 'r') as f:
         print("String -> {0}".format(line))
         bytes = str.encode(line)
         print("Bytes -> {0}".format(bytes))
-        charcheck(bytes, controlchars)
+        charcheck(bytes, [x[0] for x in controlchars])
 

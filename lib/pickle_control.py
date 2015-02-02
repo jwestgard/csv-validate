@@ -30,7 +30,7 @@ control = [ (b'\x00', 'NUL', '␀', '^@', 'Null Character'),
 (b'\x19', 'EM', '␙', '^Y', 'End of Medium'),
 (b'\x1A', 'SUB', '␚', '^Z', 'Substitute'),
 (b'\x1B', 'ESC', '␛', '^[', 'Escape'),
-(b'\x1C', 'FS', '␜', '^\', 'File Separator'),
+(b'\x1C', 'FS', '␜', '^\\', 'File Separator'),
 (b'\x1D', 'GS', '␝', '^]', 'Group Separator'),
 (b'\x1E', 'RS', '␞', '^^', 'Record Separator'),
 (b'\x1F', 'US', '␟', '^_', 'Unit Separator'),
@@ -38,3 +38,6 @@ control = [ (b'\x00', 'NUL', '␀', '^@', 'Null Character'),
 
 for x in control:
 	print(x)
+
+with open('control.p', 'wb') as f:
+    pickle.dump(control, f)
