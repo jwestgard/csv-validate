@@ -10,7 +10,7 @@
   
   3. Use csvclean to cleanup the input data.
   
-  4. Load schema file and check data against the schema.
+  4. Load schema file and check data against the schema. Schema file should be a yaml file for easy creation by users.
   
   5. Generate report.
   
