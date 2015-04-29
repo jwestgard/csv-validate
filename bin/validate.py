@@ -2,7 +2,21 @@
 
 import sys, subprocess
 
-required_columns = ["ArchivalCollection", "Box", "Century", "Continent", "Contributor", "ContributorType", "CopyrightHolder", "CorpScheme", "CorpSubject", "Country", "Creator", "CreatorType", "DateAttribute", "DateCreated", "DateDigitized", "Department", "Description/Summary", "DigitizationNotes", "DigitizedByPers", "Dimensions", "DurationDerivatives", "FileName", "Form", "Format", "FormType", "GeographicalScheme", "GeographicalSubject", "Identifier", "Item", "Language", "MediaType", "Mono/Stereo", "PersonalScheme", "PersonalSubject", "Provider/Publisher", "Provider/PublisherType", "Region/State", "RepositoryBrowse", "Rights", "Series", "Settlement/City", "SharestreamURLs", "Subseries", "Title", "TopicalScheme", "TopicalSubject", "TrackFormat", "XMLType"]
+required_columns =[ "Accession", "AlternateTitle", "ArchivalCollection", "AspectRatio",
+                    "Box", "Century", "Color", "Continent", "Contributor", 
+                    "ContributorType", "CopyrightHolder", "CorpScheme", "CorpSubject", 
+                    "Country", "Creator", "CreatorType", "DataRate", "DateAttribute", 
+                    "DateCreated", "DateDigitized", "Department", "Description/Summary", 
+                    "DigitizationNotes", "DigitizedByDept", "DigitizedByPers", 
+                    "Dimensions", "DurationDerivatives", "FileName", "Form", "Format", 
+                    "FormType", "FrameRate", "GeographicalScheme", "GeographicalSubject", 
+                    "HorizontalPixels", "Identifier", "Item", "Language", "MediaType", 
+                    "Mono/Stereo", "PersonalScheme", "PersonalSubject", 
+                    "Provider/Publisher", "Provider/PublisherType", "Region/State", 
+                    "RepositoryBrowse", "Rights", "ScanSignal", "Series", 
+                    "Settlement/City", "SharestreamURLs", "Subseries", "Title", 
+                    "TopicalScheme", "TopicalSubject", "TrackFormat", "VerticalPixels", 
+                    "VideoStandard", "XMLType" ]
 
 bashCommand = "in2csv {0}".format(sys.argv[1])
 
