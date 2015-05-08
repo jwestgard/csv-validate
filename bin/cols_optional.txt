@@ -1,0 +1,20 @@
+AnalogInterface
+ChannelConfiguration
+Credits
+DigitalCollectionsURLs
+DigitizationSoftware
+DurationMasters
+FedoraCollection
+Finished
+ImageResolution (PPI)
+OriginalBroadcastDate
+PID
+PlaybackDevice
+PlaybackSpeed
+PreservationNote/PhysicalNote
+QANotes
+RecordingNotes
+Sound
+TimeStart (timecode)
+UMAM
+UMDM
