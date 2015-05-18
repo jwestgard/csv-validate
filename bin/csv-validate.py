@@ -3,6 +3,7 @@
 import csv
 import subprocess
 import sys
+import yaml
 
 datafile = sys.argv[1]
 schemafile = sys.argv[2]
@@ -18,10 +19,18 @@ def read_spreadsheet(datafile):
             data = [row for row in csv.DictReader(f)]    
     return data
 
-data = read_spreadsheet(datafile)
+def read_schema(schemafile):
+    with open(schemafile, 'r') as f:
+        schema = yaml.load(f)
+        return schema
 
-for row in data:
-    print(row)
+data = read_spreadsheet(datafile)
+schema = read_schema(schemafile)
+required_cols = [x['name'] for x in schema if 'required' in x.items()]
+populated_cols = [x['name'] for x in schema if 'populated' in x.items()]
+
+print("Required Columns: {0}".format(', '.join(required_cols)))
+print("Populated Columns: {0}".format(', '.join(populated_cols)))
 
 # columns_to_check = sorted(firstline.split(','))
 # required_columns =[ item['name'] for item in mydata]
