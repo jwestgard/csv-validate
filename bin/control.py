@@ -4,7 +4,7 @@ import sys, pickle
 
 inputfile = sys.argv[1]
 
-controlchars = pickle.load(open('control.p', 'rb'))
+controlchars = pickle.load(open('lib/control.p', 'rb'))
 
 print([x[0] for x in controlchars])
 

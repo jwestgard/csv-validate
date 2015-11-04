@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import csv, pickle, subprocess, sys, yaml
-
-datafile = sys.argv[1]
-schemafile = sys.argv[2]
-controlchars = pickle.load(open('../lib/control.p', 'rb'))
+import argparse
+import csv
+import pickle
+import pkg_resources
+import subprocess
+import sys
+import yaml
 
 #= Function ===========
 # Load spreadsheet data
@@ -34,8 +36,11 @@ def read_schema(schemafile):
 #= Function ===================
 # Check for ASCII control chars
 #==============================        
-def charcheck(mystring, chars):
-    for c in chars:
+def charcheck(mystring):
+    controlchars = pkg_resources.resource_string(__lib__, 'control.p')
+    print('\nLoaded set of ASCII control characters to check.')
+    for c in pickle.load(controlchars):
+        print('{0} : {1}'.format(c[0], c[3]))
         if c in mystring:
             charlocation = mystring.find(c)
             print('Found {0} at {1}'.format(c, charlocation))
@@ -43,6 +48,17 @@ def charcheck(mystring, chars):
 #======================
 # Main logic
 #======================
+parser = argparse.ArgumentParser(description='Validate Tabular Data')
+parser.add_argument('--schema', '-s', action='store', 
+    help='path to schema file to validate against')
+parser.add_argument('--output', '-o', action='store', 
+    help='path to outputfile (for cleaned data)')
+parser.add_argument('filename', help='data file to be validated or cleaned')
+args = parser.parse_args()
+
+datafile = args.filename
+if args.schema:
+    schemafile = args.schema
 
 ## CHECK CONTROL CHARS -- NEED TO DO BEFORE DICTREADER AS CHARS WILL MESS UP PARSING
 ## 
@@ -55,9 +71,6 @@ def charcheck(mystring, chars):
 #         bytes = str.encode(line)
 #         print("Bytes -> {0}".format(bytes))
 #         charcheck(bytes, [x[0] for x in controlchars])
-
-print('\nLoaded set of ASCII control characters to check.')
-print(['{0} : {1}'.format(c[0], c[3]) for c in controlchars])
 
 data, fields = read_spreadsheet(datafile)
 print('{0} lines of spreadsheet data loaded.'.format(len(data)))
