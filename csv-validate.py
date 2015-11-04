@@ -60,6 +60,9 @@ datafile = args.filename
 if args.schema:
     schemafile = args.schema
 
+with open(datafile, 'rb') as f:
+    charcheck(f.read)
+
 ## CHECK CONTROL CHARS -- NEED TO DO BEFORE DICTREADER AS CHARS WILL MESS UP PARSING
 ## 
 # with open(inputfile, 'r') as f:
