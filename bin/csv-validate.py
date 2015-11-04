@@ -18,8 +18,8 @@ def read_spreadsheet(datafile):
     else:
         with open(datafile, 'r') as f:
             reader = csv.DictReader(f)
-    fields = reader.fieldnames
-    data = [row for row in reader]
+            fields = reader.fieldnames
+            data = [row for row in reader]
     return data, fields
 
 #= Function ===========
