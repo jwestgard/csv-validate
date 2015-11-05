@@ -1,0 +1,6 @@
+Type,Color,Quantity,Year
+apple,red,12,2015
+banana,yellow,6,2014
+orange,orange,3,2013
+apple,green,24,
+pineapple,yellow,1,March 2012
