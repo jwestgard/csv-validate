@@ -1,4 +1,4 @@
-Validation of tabular (CSV) data against a schema defined in YAML or JSON.  It is possible to designate up to six main "rules":
+Validation of tabular (CSV) data against a schema defined in YAML or JSON. See the schema.yml file in this repository for an example and instructions on creating a schema. It is possible to designate up to six main "rules":
 * required columns (i.e. columns that must exist for all rows)
 * allowed columns (i.e. *only* the specified columns can exist -- for strict control of data)
 * populated columns (i.e. these columns must contain a non-null value)
