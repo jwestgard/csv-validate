@@ -1,7 +1,7 @@
-Validation of tabular (CSV) data against a schem defined in YAML or JSON.  It is possible to designate up to six main "rules":
-* required columns
-* allowed columns
-* populated columns (i.e. must contain a non-null value)
-* controlled
-* numeric
-* date
+Validation of tabular (CSV) data against a schema defined in YAML or JSON.  It is possible to designate up to six main "rules":
+* required columns (i.e. columns that must exist for all rows)
+* allowed columns (i.e. *only* the specified columns can exist -- for strict control of data)
+* populated columns (i.e. these columns must contain a non-null value)
+* controlled (specify a set of possible values as a list in the form: {'colname' : ['val1','val2','val3']}
+* numeric (cells in these columns may only contain digits)
+* date (values in these columns must be parsable as ISO-8601 dates)
