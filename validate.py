@@ -90,27 +90,14 @@ def validate(colnames, data, schema):
 
         # require columns to be populated
         elif rule == 'populated':
-            rule_set = schema[rule]
             print("{0}. Checking for populated columns ... ".format(
                 rule_num+1), end='')
-            for column_rule in rule_set:
-                filtered_rows = data
-                # check for conditions (specified as key-value pair)
-                if isinstance(column_rule, dict):
-                    (column, rules), = column_rule.items()
-                    # filter rows on each condition
-                    print("filtering {0} for '{1}' ... ".format(
-                        rules, column), end='')
-                    for k,v in rules.items():
-                        filtered_rows = [i for i in filtered_rows if i[k] == v]
-                else:
-                    column = column_rule
-                # check filtered rows
-                for n, r in enumerate(filtered_rows):
-                    if r[column] == '':
+            for row_num, row in enumerate(data):
+                for popcol in schema['populated']:
+                    if row[popcol] == '':
                         violations[rule].append(
                             "Column '{0}' is empty in row {1}.".format(
-                                column, n+1))
+                                popcol, row_num+2))
         
         # require columns to contain numeric data only
         elif rule == 'numeric':
@@ -131,13 +118,12 @@ def validate(colnames, data, schema):
                 rule_num+1), end='')
             for row_num, row in enumerate(data):
                 for datcol in schema['date']:
-                    if row[datcol] is not "":
-                        try:
-                            parse(row[datcol]).date()
-                        except (ValueError, TypeError):
-                            violations[rule].append(
-                                "Row {0}: '{1}' => '{2}' is not a date.".format(
-                                    row_num+2, datcol, row[datcol]))
+                    try:
+                        parse(row[datcol])
+                    except ValueError:
+                        violations[rule].append(
+                            "Column '{0}' in row {1} is not a date.".format(
+                                datcol, row_num+2))
         
         # require values from controlled value list
         elif rule == 'controlled':
@@ -145,11 +131,10 @@ def validate(colnames, data, schema):
                 rule_num+1), end='')
             for row_num, row in enumerate(data):
                 for concol in schema['controlled']:
-                    for k in concol:
-                        if row[k] not in concol[k]:
-                            violations[rule].append(
-                                "Row {0}: '{0}' has illegal value.".format(
-                                    row_num+2, concol[k]))
+                    if row[concol] not in schema['controlled'][concol]:
+                        violations[rule].append(
+                            "Column '{0}' in row {1} has illegal value.".format(
+                                concol, row_num+2))
         
         # raise an error for non-conforming schema entries
         else:
@@ -197,6 +182,7 @@ if args.schema:
         print("===============")
         for n, v in enumerate(violations):
             print("{0}. {1}".format(n+1, v))
+            print("")
     else:
         print("Result: Successful Validation!\n")
          
